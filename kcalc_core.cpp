@@ -877,6 +877,7 @@ bool CalcEngine::evalStack()
 
 void CalcEngine::Reset()
 {
+    percent_mode_ = false;
     error_ = false;
     last_number_ = KNumber::Zero;
 
