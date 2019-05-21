@@ -36,7 +36,10 @@ protected:
 	void paintEvent(QPaintEvent *event);
 
 private:
+	void enterEvent(QEvent * event) override;
+	void leaveEvent(QEvent * event) override;
 	bool on_;
+	bool over_;
 };
 
 #endif
