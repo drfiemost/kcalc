@@ -1654,8 +1654,8 @@ void KCalculator::showSettings() {
 	dialog->addPage(fonts, i18n("Font"), QLatin1String("preferences-desktop-font"), i18n("Select Display Font"));
 
 	// color settings
-	Colors *const color = new Colors(0);
-	dialog->addPage(color, i18n("Colors"), QLatin1String("format-fill-color"), i18n("Button & Display Colors"));
+    Colors *const color = new Colors(nullptr);
+	dialog->addPage(color, i18n("Colors"), QLatin1String("preferences-desktop-color"), i18n("Button & Display Colors"));
 
 	// constant settings
 	if (!constants_) {
