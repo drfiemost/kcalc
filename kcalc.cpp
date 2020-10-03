@@ -679,6 +679,7 @@ void KCalculator::setupKeys() {
 	mem_button_list_.append(pbMemClear);
 	mem_button_list_.append(pbClear);
 	mem_button_list_.append(pbAllClear);
+	mem_button_list_.append(pbBackspace);
 
 	operation_button_list_.append(pbMultiplication);
 	operation_button_list_.append(pbParenOpen);
@@ -1776,7 +1777,6 @@ void KCalculator::slotSetSimpleMode() {
 	pbSquare->hide();
 	pbPower->hide();
 	pbCube->hide();
-	pbBackspace->hide();
 	pbEE->hide();
 
 	// delete the constant menu since it doesn't fit
@@ -1807,7 +1807,6 @@ void KCalculator::slotSetScienceMode() {
 	pbSquare->show();
 	pbPower->show();
 	pbCube->show();
-	pbBackspace->show();
 	pbEE->show();
 
 	// show or hide some groups of buttons
@@ -1845,7 +1844,6 @@ void KCalculator::slotSetStatisticMode() {
 	pbSquare->show();
 	pbPower->show();
 	pbCube->show();
-	pbBackspace->show();
 	pbEE->show();
 
 	// show or hide some groups of buttons
@@ -1884,7 +1882,6 @@ void KCalculator::slotSetNumeralMode() {
 	pbSquare->show();
 	pbPower->show();
 	pbCube->show();
-	pbBackspace->show();
 	pbEE->show();
 
 	// show or hide some groups of buttons
