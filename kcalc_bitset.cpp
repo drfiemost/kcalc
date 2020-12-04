@@ -99,7 +99,7 @@ KCalcBitset::KCalcBitset(QWidget *parent) : QFrame(parent), value_(0) {
 
 			for (int bit = 0; bit < 8; bit++) {
 				BitButton *const tmpBitButton = new BitButton(this);
-				tmpBitButton->setToolTip(i18n("Bit %1", bitCounter));
+				tmpBitButton->setToolTip(i18n("Bit %1 = %2", bitCounter, 1ULL << bitCounter));
 				wordlayout->addWidget(tmpBitButton);
 				bit_button_group_->addButton(tmpBitButton, bitCounter);
 				bitCounter--;
