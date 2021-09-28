@@ -1659,33 +1659,33 @@ void KCalculator::showSettings() {
 
 	// constant settings
 	if (!constants_) {
-		constants_ = new Constants(0);
-	}
+		constants_ = new Constants(nullptr);
 
-	KCalcConstMenu *tmp_menu;
-	tmp_menu = new KCalcConstMenu(this);
-	connect(tmp_menu, SIGNAL(triggeredConstant(science_constant)), this, SLOT(slotChooseScientificConst0(science_constant)));
-	constants_->pushButton0->setMenu(tmp_menu);
+        KCalcConstMenu *tmp_menu;
+        tmp_menu = new KCalcConstMenu(constants_);
+        connect(tmp_menu, SIGNAL(triggeredConstant(science_constant)), this, SLOT(slotChooseScientificConst0(science_constant)));
+        constants_->pushButton0->setMenu(tmp_menu);
 
-	tmp_menu = new KCalcConstMenu(this);
-	connect(tmp_menu, SIGNAL(triggeredConstant(science_constant)), this, SLOT(slotChooseScientificConst1(science_constant)));
-	constants_->pushButton1->setMenu(tmp_menu);
+        tmp_menu = new KCalcConstMenu(constants_);
+        connect(tmp_menu, SIGNAL(triggeredConstant(science_constant)), this, SLOT(slotChooseScientificConst1(science_constant)));
+        constants_->pushButton1->setMenu(tmp_menu);
 
-	tmp_menu = new KCalcConstMenu(this);
-	connect(tmp_menu, SIGNAL(triggeredConstant(science_constant)), this, SLOT(slotChooseScientificConst2(science_constant)));
-	constants_->pushButton2->setMenu(tmp_menu);
+        tmp_menu = new KCalcConstMenu(constants_);
+        connect(tmp_menu, SIGNAL(triggeredConstant(science_constant)), this, SLOT(slotChooseScientificConst2(science_constant)));
+        constants_->pushButton2->setMenu(tmp_menu);
 
-	tmp_menu = new KCalcConstMenu(this);
-	connect(tmp_menu, SIGNAL(triggeredConstant(science_constant)), this, SLOT(slotChooseScientificConst3(science_constant)));
-	constants_->pushButton3->setMenu(tmp_menu);
+        tmp_menu = new KCalcConstMenu(constants_);
+        connect(tmp_menu, SIGNAL(triggeredConstant(science_constant)), this, SLOT(slotChooseScientificConst3(science_constant)));
+        constants_->pushButton3->setMenu(tmp_menu);
 
-	tmp_menu = new KCalcConstMenu(this);
-	connect(tmp_menu, SIGNAL(triggeredConstant(science_constant)), this, SLOT(slotChooseScientificConst4(science_constant)));
-	constants_->pushButton4->setMenu(tmp_menu);
+        tmp_menu = new KCalcConstMenu(constants_);
+        connect(tmp_menu, SIGNAL(triggeredConstant(science_constant)), this, SLOT(slotChooseScientificConst4(science_constant)));
+        constants_->pushButton4->setMenu(tmp_menu);
 
-	tmp_menu = new KCalcConstMenu(this);
-	connect(tmp_menu, SIGNAL(triggeredConstant(science_constant)), this, SLOT(slotChooseScientificConst5(science_constant)));
-	constants_->pushButton5->setMenu(tmp_menu);
+        tmp_menu = new KCalcConstMenu(constants_);
+        connect(tmp_menu, SIGNAL(triggeredConstant(science_constant)), this, SLOT(slotChooseScientificConst5(science_constant)));
+        constants_->pushButton5->setMenu(tmp_menu);
+    }
 
 	dialog->addPage(constants_, i18n("Constants"), QLatin1String("preferences-kcalc-constants"), i18n("Define Constants"));
 
