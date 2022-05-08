@@ -738,7 +738,7 @@ void KCalcDisplay::newCharacter(const QChar new_char) {
 			}
 			return;
 		}
-		// no break
+		[[fallthrough]];
 	case '9':
 	case '8':
 		if (num_base_ == NB_OCTAL) {
@@ -747,7 +747,7 @@ void KCalcDisplay::newCharacter(const QChar new_char) {
 			}
 			return;
 		}
-		// no break
+		[[fallthrough]];
 	case '7':
 	case '6':
 	case '5':
