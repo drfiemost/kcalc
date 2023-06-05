@@ -22,6 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "kcalc_bitset.h"
 #include "bitbutton.h"
 
+#include <cstdint>
+
 #include <QButtonGroup>
 #include <QGridLayout>
 #include <QHBoxLayout>
