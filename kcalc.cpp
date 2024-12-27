@@ -78,8 +78,8 @@ KCalculator::KCalculator(QWidget *parent) :
 		shift_mode_(false),
 		hyp_mode_(false),
 		memory_num_(0.0),
-		constants_menu_(0),
-		constants_(0),
+		constants_menu_(nullptr),
+		constants_(nullptr),
 		core() {
 
 	// central widget to contain all the elements
@@ -748,7 +748,7 @@ void KCalculator::slotConstantToDisplay(const science_constant &const_chosen) {
 	QString val = const_chosen.value;
 	val.replace(QLatin1Char('.'), KNumber::decimalSeparator());
 	calc_display->setAmount(KNumber(val));
-    updateDisplay(0);
+    updateDisplay({});
 }
 
 //------------------------------------------------------------------------------
@@ -963,7 +963,7 @@ void KCalculator::slotMemRecallclicked() {
 	calc_display->sendEvent(KCalcDisplay::EventReset);
 
 	calc_display->setAmount(memory_num_);
-	updateDisplay(0);
+	updateDisplay({});
 }
 
 //------------------------------------------------------------------------------
@@ -972,7 +972,7 @@ void KCalculator::slotMemRecallclicked() {
 //------------------------------------------------------------------------------
 void KCalculator::slotMemStoreclicked() {
 
-	EnterEqual();
+	EnterEqual(CalcEngine::REPEAT_PREVENT);
 
 	memory_num_ = calc_display->getAmount();
 	calc_display->setStatusText(MemField, QLatin1String("M"));
@@ -1133,7 +1133,7 @@ void KCalculator::slotReciclicked() {
 	KNumber tmp_num = calc_display->getAmount();
 	calc_display->sendEvent(KCalcDisplay::EventReset);
 	calc_display->setAmount(tmp_num);
-	updateDisplay(0);
+	updateDisplay({});
 }
 
 //------------------------------------------------------------------------------
@@ -1277,7 +1277,7 @@ void KCalculator::slotPowerclicked() {
 	KNumber tmp_num = calc_display->getAmount();
 	calc_display->sendEvent(KCalcDisplay::EventReset);
 	calc_display->setAmount(tmp_num);
-	updateDisplay(0);
+	updateDisplay({});
 }
 
 //------------------------------------------------------------------------------
@@ -1445,9 +1445,9 @@ void KCalculator::slotPeriodclicked() {
 // Name: EnterEqual
 // Desc: calculates and displays the result of the pending operations
 //------------------------------------------------------------------------------
-void KCalculator::EnterEqual() {
+void KCalculator::EnterEqual(CalcEngine::Repeat allow_repeat) {
 
-    core.enterOperation(calc_display->getAmount(), CalcEngine::FUNC_EQUAL);
+    core.enterOperation(calc_display->getAmount(), CalcEngine::FUNC_EQUAL, allow_repeat);
     updateDisplay(UPDATE_FROM_CORE | UPDATE_STORE_RESULT);
 }
 
@@ -1591,7 +1591,7 @@ void KCalculator::slotStatClearDataclicked() {
 		statusBar()->showMessage(i18n("Stat mem cleared"), 3000);
 	} else {
 		pbShift->setChecked(false);
-		updateDisplay(0);
+		updateDisplay({});
 	}
 }
 
@@ -1625,7 +1625,7 @@ void KCalculator::slotConstclicked(int button) {
 			calc_display->setAmount(calc_display->getAmount());
 		}
 
-		updateDisplay(0);
+		updateDisplay({});
 	}
 }
 
@@ -1646,12 +1646,12 @@ void KCalculator::showSettings() {
 	dialog->showButtonSeparator(true);
 
 	// general settings
-	General *const general = new General(0);
+	General *const general = new General(nullptr);
 	general->kcfg_Precision->setMaximum(maxprecision);
 	dialog->addPage(general, i18n("General"), QLatin1String("accessories-calculator"), i18n("General Settings"));
 
 	// font settings
-	Fonts *const fonts = new Fonts(0);
+	Fonts *const fonts = new Fonts(nullptr);
 	dialog->addPage(fonts, i18n("Font"), QLatin1String("preferences-desktop-font"), i18n("Select Display Font"));
 
 	// color settings
@@ -1782,7 +1782,7 @@ void KCalculator::slotSetSimpleMode() {
 
 	// delete the constant menu since it doesn't fit
 	delete constants_menu_;
-	constants_menu_ = 0;
+	constants_menu_ = nullptr;
 
 	KCalcSettings::setCalculatorMode(KCalcSettings::EnumCalculatorMode::simple);
 	// must be done after setting the calculator mode because the
@@ -2073,7 +2073,7 @@ void KCalculator::changeButtonNames() {
 void KCalculator::slotBitsetChanged(quint64 value) {
 
     calc_display->setAmount(KNumber(value));
-    updateDisplay(0);
+    updateDisplay({});
 }
 
 //------------------------------------------------------------------------------
@@ -2097,7 +2097,7 @@ void KCalculator::updateSettings() {
 	setPrecision();
 
 	// Show the result in the app's caption in taskbar (wishlist - bug #52858)
-	disconnect(calc_display, SIGNAL(changedText(QString)), this, 0);
+	disconnect(calc_display, SIGNAL(changedText(QString)), this, nullptr);
 
 	if (KCalcSettings::captionResult()) {
 		connect(calc_display, SIGNAL(changedText(QString)), SLOT(setCaption(QString)));
@@ -2213,7 +2213,7 @@ void KCalculator::setFonts() {
 void KCalculator::setPrecision() {
 
 	KNumber::setDefaultFloatPrecision(KCalcSettings::precision());
-	updateDisplay(0);
+	updateDisplay({});
 }
 
 //------------------------------------------------------------------------------

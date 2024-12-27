@@ -44,7 +44,7 @@ public:
 #endif
 
 	explicit knumber_float(mpfr_t mpf);
-	virtual ~knumber_float();
+	~knumber_float() override;
 
 private:
 	// conversion constructors
