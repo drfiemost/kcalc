@@ -987,6 +987,7 @@ void KCalculator::slotMemStoreclicked() {
 void KCalculator::slotNumberclicked(int number_clicked) {
 
     calc_display->enterDigit(number_clicked);
+    core.setOnlyUpdateOperation(false);
 }
 
 //------------------------------------------------------------------------------
@@ -2116,6 +2117,7 @@ void KCalculator::updateDisplay(UpdateFlags flags) {
 
 	if(flags & UPDATE_FROM_CORE) {
 		calc_display->updateFromCore(core, (flags & UPDATE_STORE_RESULT) != 0);
+        core.setOnlyUpdateOperation(true);
 	} else {
 		calc_display->update();
 	}
@@ -2319,10 +2321,10 @@ extern "C" KDE_EXPORT int kdemain(int argc, char *argv[]) {
 		ki18n(description),
 		KAboutData::License_GPL,
 		ki18n(
-			"&copy; 2008-2013, Evan Teran\n"
-			"&copy; 2000-2008, The KDE Team\n"
-			"&copy; 2003-2005, Klaus Niederkr" "\xc3\xbc" "ger\n"
-			"&copy; 1996-2000, Bernd Johannes Wuebben"),
+			"Copyright © 2008-2013, Evan Teran\n"
+			"Copyright © 2000-2008, The KDE Team\n"
+			"Copyright © 2003-2005, Klaus Niederkr" "\xc3\xbc" "ger\n"
+			"Copyright © 1996-2000, Bernd Johannes Wuebben"),
 		KLocalizedString(),
 		"http://utils.kde.org/projects/kcalc");
 
