@@ -502,7 +502,7 @@ bool KCalcDisplay::setAmount(const KNumber &new_amount) {
 			qint64 tmp_workaround = display_amount_.toInt64();
 			const bool neg = tmp_workaround < 0;
 			if (neg) {
-				tmp_workaround = qAbs(tmp_workaround);
+				tmp_workaround = std::abs(tmp_workaround);
 			}
 			
 			display_str = QString::number(tmp_workaround, num_base_).toUpper();
@@ -945,7 +945,7 @@ void KCalcDisplay::paintEvent(QPaintEvent *) {
 	// draw the status texts using half of the normal
 	// font size but not smaller than 7pt
 	QFont fnt(font());
-	fnt.setPointSize(qMax((fnt.pointSize() / 2), 7));
+	fnt.setPointSize(std::max((fnt.pointSize() / 2), 7));
 	painter.setFont(fnt);
 	
 	QFontMetrics fm(fnt);
@@ -968,7 +968,7 @@ QSize KCalcDisplay::sizeHint() const {
 
 	// expanded by 3/4 font height to make room for the status texts
 	QFont fnt(font());
-	fnt.setPointSize(qMax(((fnt.pointSize() * 3) / 4), 7));
+	fnt.setPointSize(std::max(((fnt.pointSize() * 3) / 4), 7));
 	
 	const QFontMetrics fm(fnt);
 	sz.setHeight(sz.height() + fm.height());
