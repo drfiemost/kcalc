@@ -192,7 +192,7 @@ void KCalcButton::calcSizeHint() {
 	int margin = style()->pixelMetric(QStyle::PM_ButtonMargin, nullptr, this);
 	
 	// want narrow margin than normal
-	margin = qMax(margin / 2, 3);
+	margin = std::max(margin / 2, 3);
 
 	// approximation because metrics doesn't account for richtext
 	size_ = fontMetrics().size(0, mode_[ModeNormal].label);
